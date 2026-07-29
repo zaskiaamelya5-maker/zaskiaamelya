@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Pertamaku</title>
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* BODY */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(to right, #f953c6, #b91d73);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #f953c6;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #f953c6, #b91d73, #f953c6);
+            background-size: 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .hero-emoji {
+            font-size: 80px;
+            display: block;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #f953c6, #b91d73);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(249, 83, 198, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid #f953c6;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(249, 83, 198, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* CARDS SECTION */
+        .section {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #f953c6;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #f953c6;
+            box-shadow: 0 10px 30px rgba(249, 83, 198, 0.2);
+        }
+
+        .card-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* API TEST SECTION */
+        .api-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        #api-result {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            display: none;
+        }
+
+        #api-result.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #f953c6;
+            text-decoration: none;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">🌟 MyWebsite</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#fitur">Fitur</a></li>
+            <li><a href="#api">API</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <span class="hero-emoji">🚀</span>
+        <h1>Website Pertamaku!</h1>
+        <p>
+            Dibuat dengan Node.js & Express, langsung dari HP Android 📱
+            dan di-deploy ke Vercel secara gratis!
+        </p>
+        <a href="#fitur" class="btn btn-primary">Lihat Fitur</a>
+        <a href="#api" class="btn btn-secondary">Test API</a>
+    </section>
+
+    <!-- FITUR -->
+    <section class="section" id="fitur">
+        <h2 class="section-title">✨ Fitur</h2>
+        <div class="cards">
+
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Super Cepat</h3>
+                <p>Dibangun dengan Node.js dan Express untuk performa yang optimal dan loading yang cepat.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📱</div>
+                <h3>Responsive</h3>
+                <p>Tampilan yang sempurna di semua perangkat, dari HP hingga desktop.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h3>Desain Modern</h3>
+                <p>UI yang cantik dengan gradient, animasi, dan efek glassmorphism.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔌</div>
+                <h3>REST API</h3>
+                <p>Dilengkapi dengan API endpoint yang bisa diakses dan ditest langsung.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🌐</div>
+                <h3>Deploy Gratis</h3>
+                <p>Hosted di Vercel secara gratis dengan domain .vercel.app.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🛠️</div>
+                <h3>Dibuat dari HP</h3>
+                <p>Bukti bahwa kamu bisa ngoding dan deploy website hanya dari HP Android!</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- API TEST -->
+    <section class="api-section" id="api">
+        <h2 class="section-title">🔌 Test API</h2>
+        <p style="color: #ccc; margin-bottom: 20px;">
+            Klik tombol di bawah untuk mengetes API endpoint
+        </p>
+        <button class="btn btn-primary" onclick="testAPI()" id="api-btn">
+            🚀 Panggil API
+        </button>
+        <div id="api-result"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>
+            Dibuat dengan ❤️ dari HP Android |
+            <a href="https://github.com" target="_blank">GitHub</a> |
+            <a href="https://vercel.com" target="_blank">Vercel</a>
+        </p>
+        <p style="margin-top: 10px;">
+            © 2025 Website Pertamaku. All rights reserved.
+        </p>
+    </footer>
+
+    <script>
+        async function testAPI() {
+            const btn = document.getElementById('api-btn');
+            const result = document.getElementById('api-result');
+
+            btn.textContent = '⏳ Loading...';
+
+            try {
+                const response = await fetch('/api/hello');
+                const data = await response.json();
+
+                result.innerHTML = `
+                    <p style="color: #4CAF50; font-weight: bold;">
+                        ✅ API Berhasil Dipanggil!
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <strong>Pesan:</strong> ${data.message}
+                    </p>
+                    <p>
+                        <strong>Waktu:</strong> ${data.waktu}
+                    </p>
+                `;
+                result.classList.add('show');
+            } catch (error) {
+                result.innerHTML = `
+                    <p style="color: #f44336; font-weight: bold;">
+                        ❌ Error: ${error.message}
+                    </p>
+                `;
+                result.classList.add('show');
+            }
+
+            btn.textContent = '🚀 Panggil API';
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))
+                    .scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+
+</body>
+  </html>
